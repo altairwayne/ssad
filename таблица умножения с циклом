@@ -1,0 +1,21 @@
+<?php
+
+
+$rows = 10;
+$cols = 10;
+
+echo '<table>';
+
+$rr = 1;
+
+while ($rr <= $rows) {
+  echo '<tr>';
+  
+  $cc = 1;
+  
+  while ($cc <= $c) {
+    echo '<td>'. $cc * $rr;
+    $cc++;
+  
+  $rr++;
+}
