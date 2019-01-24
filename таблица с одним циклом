@@ -1,0 +1,17 @@
+<?php
+
+$a = 1;
+$b = 1;
+$rows = 9;
+
+while ($a < 10) {
+	if ($b <= $rows) {
+		$c = $a * $b;
+		echo "$a * $b = $c";
+		echo '<br>';
+		$b++;
+	} else {
+		$a++;
+		$b = 1;
+	}
+}
