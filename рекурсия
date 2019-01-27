@@ -1,0 +1,14 @@
+function fak($a) 
+{	
+	if ($a == 1) {
+
+		return 1;
+
+	} else {
+
+		return $a * fak($a - 1);
+	}
+
+}
+
+echo fak(6);
