@@ -1,0 +1,119 @@
+<?php
+/*#1 TASK
+for($i=1; $i<6; $i++){
+    $arr[]=rand(0,100);
+}
+print_r($arr);
+#2 TASK
+echo "sum(all) = " . array_sum($arr) . '<br>';
+<?php
+#3 TASK
+$arr=[1,2,3,4];
+
+function mas($arr)
+{
+    
+    return array_sum($arr);
+}
+echo mas($arr);
+#4 TASK
+echo max($arr) . '<br>';
+<?php
+#5 TASK
+$arr=[1,2,3,4];
+function mas($arr)
+{
+    $mx=-1;
+    foreach($arr as $max){
+        if($mx<$max){
+            $mx=$max;
+        }
+    }
+    return $mx;
+}
+echo mas($arr);
+#6 TASK
+echo min($arr) . '<br>';
+#7 TASK
+$arr=[1,2,3,4];
+function mas($arr)
+{
+    $mn=100;
+    foreach($arr as $min){
+        if($mn>$min){
+            $mn=$min;
+        }
+    }
+    return $mn;
+}
+echo mas($arr);
+#8 TASK
+for($a=1; $a<11; $a++){
+    $mas[]=rand(0,100);
+}
+print_r($mas);
+#9 TASK
+function arr($mas){
+    $mas1 = array();
+    
+    foreach($mas as $m){
+      if($m % 2 == 0){
+        array_push($mas1, $m);
+      }
+    }
+    
+    return $mas1;
+    }
+arr($mas);
+print_r(arr($mas));
+#10 TASK
+<?php
+$a=rand(0,200000);
+function div_int($a)
+{
+    $arr=[];
+    for($i=1; $i<=$a; $i++){
+        if($a%$i==0){
+            array_push($arr, $i);
+        }
+    }
+    echo $a . '<br>';
+    
+    return $arr;
+    
+}
+echo '<pre>';  
+print_r(div_int($a));
+echo '</pre>';
+# 11 TASK
+<?php
+for($a=0; $a<10; $a++){
+    $mas[]=rand(0,100);
+}
+echo '<pre>';
+print_r($mas);
+echo '</pre>';
+
+
+for($i=0; $i<10; $i++){
+    $new_mas[$mas[$i]]=div_int($mas[$i]);
+}
+
+
+echo '<pre>';
+print_r($new_mas);
+echo '</pre>';
+
+
+function div_int($a)
+{
+    $arr=[];
+    for($i=1; $i<=$a; $i++){
+        if($a%$i==0){
+            array_push($arr, $i);
+        }
+    }
+    
+    return $arr;
+    
+}
