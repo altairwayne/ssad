@@ -1,0 +1,8 @@
+header('Content-Type: text/html; charset=utf-8');
+$pattern = '/<a class="place-story__title__link" href="\/restaurant\/[A-zА-я0-9\-]{1,}">.{1,}?<\/a>/u';
+
+$page = file_get_contents('https://restoran.kz/restaurant');
+
+$result = [];
+preg_match_all($pattern, $page, $result);
+print_r($result);
