@@ -1,0 +1,120 @@
+<?php
+
+class User
+{
+	var $name  = '';
+	var $acces = 'пользователь';
+
+	function __construct($name)
+	{
+		$this->name = $name;
+		$this->qwe();
+	}
+
+	function qwe()
+	{
+		echo 'OPA F30'. $this->name. '!и я'. $this->acces. '!<br>';
+	}
+
+	function ewq($user)
+	{
+		echo $this->name. ': эй, '. $user->name. ', пойдем кодить нигга<br>';
+	}
+
+
+}
+
+class Admin extends User
+{
+	var $acces = 'Bog';	
+	function kick($user)
+	{
+		echo $this->name. ': Гори в бане, '. $user->name. '!<br>';
+	}
+}
+
+$ramazan = new User('рамазан');
+$zaure   = new User('зауре');
+$hm      = new admin ('хм');
+
+$hm -> ewq($zaure);
+
+$ramazan->ewq($zaure);
+$hm -> kick($ramazan);
+$hm -> ewq($zaure);
+
+
+
+
+
+
+
+class doll
+{
+    var $type;
+    var $gender;
+    var $age;
+    var $color;
+    function __construct()
+
+
+
+    {
+        $types=[
+            'Птица',
+            'Мышь',
+            'Волк',
+            'Кошка',
+            'Собака',
+            'Ворона',
+        ];
+
+        $genders=['Мальчик','Девочка'];
+        
+        $colors = [
+            'red',
+            'blue',
+            'green',
+            'purple',
+        ];
+
+
+    	$this->type = $types[rand(0,5)];
+    	$this->gender = $genders[rand(0,1)];
+    	$this->age =rand(1,15);
+    	$this->color=$colors[rand(0,3)];
+    }
+
+	function run()
+	{
+   	 	echo 'Привет, я ' . $this->gender.' и я <span style="color":'. $this->color.';">'
+   	 	.$this->type. '</span><br>';
+	}   
+
+
+}
+
+$doll = new doll();
+$doll->run();
+
+class puppeteer
+{
+	var $gender;
+	var $voice;
+	var $talant;
+	var $dols;
+
+	FUNCTION __construct()
+	{
+		$genders = ['trans'];
+
+		$voice = ['бесячии', 'бэтмен', 'тонкии'];
+
+		$talant = rand(0, 10);
+
+		$dols = rand(1, 2);
+
+	}
+
+	function play ()
+}
