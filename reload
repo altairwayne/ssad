@@ -1,0 +1,71 @@
+<?php
+
+include 'fun.php';
+
+$globalRests = [];
+for ($i = 1, $pages = getMaxPage(1); $i <= $pages; $i++) {
+	$globalRests    = array_merge($globalRests, getRestsFromPage($i));
+}
+
+
+
+
+
+
+
+$host 	 =  '127.0.0.1';
+$db   	 =  'opaf5';
+$user 	 =  'admin';
+$pass  	 =  'w21w21';
+$charset =  'utf8';
+
+$dsn     = "mysql:host=$host;dbname=$db;charset=$charset";
+$opt     = [
+    PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+    PDO::ATTR_EMULATE_PREPARES   => false,
+];
+
+
+$pdo  = new PDO($dsn, $user, $pass, $opt);
+
+$stmt = $pdo->prepare("Insert INTO 
+        `rest` (
+            `name`,
+            `link`,
+            `cuisine`,
+            `price`,
+            `worktime`,
+            `address`
+        ) VALUES (
+            :name,
+            :link,
+            :cuisine,
+            :price,
+            :worktime,
+            :address
+        )
+");
+
+
+foreach ($globalRests as $rest) {
+	$stmt->execute([
+		':name'     => $rest['name'],
+		':link'     => $rest['link'],
+		':cuisine'  => $rest['cuisine'],
+		':price'    => $rest['price'],
+		':worktime' => $rest['worktime'],
+		':address'  => $rest['address']
+	]);
+}
+
+$stmt->execute([
+    ':name'     => 'Krutoi',
+    ':link'     => '/link',
+    ':cuisine'  => 'kuhnja plemeni matumba',
+    ':price'    => '100000-120000',
+    ':worktime' => '10.00-00.00',
+    ':address'  => 'Gde-to tam'
+]);
+
+
