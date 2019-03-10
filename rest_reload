@@ -1,0 +1,79 @@
+$stmt = $pdo->prepare("TRUNCATE `rest`");
+$stmt->execute();
+
+$stmt = $pdo->prepare("TRUNCATE `CS`");
+$stmt->execute();
+
+$globalRests = [];
+for ($i = 1, $pages = getMaxPage(1); $i <= $pages; $i++) {
+	$globalRests = array_merge($globalRests, getRestsFromPage($i));
+}
+
+$cs = [];
+foreach ($globalRests as $rest) {
+    $cs = array_merge($cs, $rest['cuisine'] ?? '');
+
+}
+
+$cs = array_unique($cs);
+print_r($cs);
+
+$stmt = $pdo->prepare("
+        INSERT INTO
+            `CS` (
+                `name`
+            ) VALUES (
+                :name
+            )
+    ");
+
+foreach ($cs as $cuisine) {
+    $stmt->execute([
+        ':name' => $cuisine
+    ]);
+}
+
+
+
+$stmt = $pdo->prepare("Insert INTO 
+        `rest` (
+            `name`,
+            `link`,
+            `price_min`,
+            `price_max`,
+            `worktime`,
+            `address`
+        ) VALUES (
+            :name,
+            :link,
+            :price_min,
+            :price_max,
+            :worktime,
+            :address
+        )
+");
+
+
+
+
+foreach ($globalRests as $rest) {
+    $stmt->execute([
+        ':name'      => $rest['name'],
+        ':link'      => $rest['link'],
+        ':price_min' => $rest['price']['price_min'],
+        ':price_max' => $rest['price']['price_max'],
+        ':worktime'  => $rest['worktime'],
+        ':address'   => $rest['address']
+    ]);
+}
+
+/*$stmt->execute([
+    ':name' => 'Krutoi',
+    ':link' => '/link', 
+    ':cuisine' => 'kuhnja plemeni matumba',
+    ':price' => '100000-120000',
+    ':worktime' => '10.00-00.00',
+    ':address' => 'Gde-to tam'
+]);
+
+*/
