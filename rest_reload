@@ -1,4 +1,4 @@
-$stmt = $pdo->prepare("TRUNCATE `rest`");
+reloadв$stmt = $pdo->prepare("TRUNCATE `rest`");
 $stmt->execute();
 
 $stmt = $pdo->prepare("TRUNCATE `CS`");
