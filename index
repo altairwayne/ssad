@@ -1,0 +1,27 @@
+<?php
+
+
+
+
+include 'db.php';
+
+$stmt = $pdo -> prepare("
+		SELECT
+			`id`,
+			`name`,
+			`worktime` AS `wt`
+		FROM
+			`rest`
+		WHERE
+			`price_max` < :max and `price_min` > :min
+			
+	");
+
+$stmt -> execute([
+	':max' => 15000,
+	':min' => 4000
+]);
+
+$result = $stmt -> fetchAll();
+
+print_r($result);
