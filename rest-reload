@@ -1,0 +1,124 @@
+<?php
+
+include 'fun.php';
+include 'db.php';
+
+
+$stmt = $pdo->prepare("TRUNCATE `rest`");
+$stmt->execute();
+
+$stmt = $pdo->prepare("TRUNCATE `CS`");
+$stmt->execute();
+
+$stmt = $pdo->prepare("TRUNCATE `rest-cs`");
+$stmt->execute();
+
+$globalRests = [];
+for ($i = 1, $pages = getMaxPage(1); $i <= $pages; $i++) {
+	$globalRests = array_merge($globalRests, getRestsFromPage($i));
+}
+
+$cs = [];
+foreach ($globalRests as $rest) {
+    $cs = array_merge($cs, $rest['cuisine'] ?? '');
+
+}
+
+
+
+
+
+
+
+
+$cs = array_unique($cs);
+
+
+$stmt = $pdo->prepare("
+        INSERT INTO
+            `CS` (  
+                `name`  
+            ) VALUES (
+                :name
+            )
+    ");
+
+
+$cuisinesMap = [];
+
+
+foreach ($cs as $cuisine) {
+    $stmt->execute([
+        ':name' => $cuisine
+    ]);
+
+    $cuisinesMap[$cuisine] = $pdo->lastInsertId();
+}
+ 
+
+print_r($cuisinesMap);   
+    
+
+$stmt = $pdo->prepare("Insert INTO      
+        `rest` (
+            `name`,
+            `link`,
+            `price_min`,
+            `price_max`,
+            `worktime`,
+            `address`
+            
+        ) VALUES (
+            :name,
+            :link,
+            :price_min,
+            :price_max,
+            :worktime,
+            :address
+        )
+");
+
+
+$stmtRC = $pdo->prepare("
+        INSERT INTO
+            `rest-cs` (
+                `id_rest`,
+                `id_cs`
+            ) VALUES (
+                :id_rest,
+                :id_cs
+            )
+    ");
+    
+foreach ($globalRests as $rest) {
+    $stmt->execute([
+        ':name'      => $rest['name'],
+        ':link'      => $rest['link'],
+        ':price_min' => $rest['price']['price_min'],
+        ':price_max' => $rest['price']['price_max'],
+        ':worktime'  => $rest['worktime'],
+        ':address'   => $rest['address']
+    ]);
+
+    $restaurantID = $pdo->lastInsertId();
+
+    foreach ($rest['cuisine'] as $cuisine) {
+        $stmtRC->execute([
+            ':id_rest' => $restaurantID,
+            ':id_cs' => $cuisinesMap[$cuisine]
+        ]);
+            
+        
+    }
+}
+
+/*$stmt->execute([
+    ':name' => 'Krutoi',
+    ':link' => '/link', 
+    ':cuisine' => 'kuhnja plemeni matumba',
+    ':price' => '100000-120000',
+    ':worktime' => '10.00-00.00',
+    ':address' => 'Gde-to tam'
+]);
+
+*/
