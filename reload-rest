@@ -1,0 +1,32 @@
+<?php
+
+
+
+
+include 'db.php';
+
+$stmt = $pdo->prepare("
+		SELECT
+			`rest`.*,
+			`CS`.`name` as `cs-name`
+		FROM
+			`rest`
+		LEFT JOIN
+			`rest-cs`
+			ON  `rest-cs`.`id_rest` = `rest`.`id`
+		LEFT JOIN
+			`CS`
+			ON `CS`.`id` = `rest-cs`.`id_cs`
+		WHERE
+			`price_max` < :max and `price_min` > :min
+			
+	");
+
+$stmt -> execute([
+	':max' => 15000,
+	':min' => 4000
+]);
+
+$result = $stmt->fetchAll();
+
+print_r($result);
