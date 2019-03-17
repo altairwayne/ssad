@@ -1,0 +1,70 @@
+<?php
+
+$arr = [17, 41, 36];
+#echo $arr[1];
+#print_r($arr);
+
+$arr = [
+    'H' => 'Hello',
+    'W' => 'World',
+    17 => 46,
+    48,
+    'arr' => [19, 43, 67],
+];
+#print_r($arr);
+
+$arr = [];
+for ($j=1; $j<10; $j++) {
+    $arr[$j] = [];
+    for ($i=1; $i<10; $i++) {
+        $arr[$j][$i] = $i * $j;
+    }
+}
+#print_r($arr);
+#echo $arr[6][8];
+
+$a = 3;
+$b = 4;
+
+function perim($a, $b)
+{
+    return 2 * ($a + $b) . '<br>';
+}
+
+echo perim(6, 8);
+echo perim(7, 38);
+echo perim(16, 28);
+
+echo '<br>';
+
+function fac($a)
+{
+    if ($a == 1) {
+        return 1;
+    } else {
+        return $a * fac($a-1);
+    }
+}
+
+echo fac(7);
+
+echo '<br>';
+echo rand(0, 10);
+
+$students = [
+    'Рамазан',
+    'Ромил',
+    'Сергей',
+    'Адильхан',
+    'Дастан',
+    'Алдияр',
+    'Таир',
+    'Вячеслав',
+    'Зауре',
+    'Геннадий',
+    'Жандос'
+];
+echo '<br>';
+echo 'Поздравляем, ' . $students[rand(0, 10)] . '!';
+
+
