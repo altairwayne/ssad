@@ -1,0 +1,22 @@
+<?php
+
+
+session_start();
+
+if ($_POST) {
+	if ($_POST['username'] == 'asd' && $_POST['password'] == '123') {
+		$_SESSION['auth'] = $_POST;
+	} else {
+		$_SESSION['epop'] = 1;
+	}
+}
+
+if (isset($_GET['logout'])) {
+	unset($_SESSION['auth']);
+
+}
+
+header('Location: /');
+/*
+var_dump($_GET);	
+var_dump($_POST)*/;	
