@@ -1,0 +1,61 @@
+<?php
+
+session_start();
+
+	
+if (isset($_SESSION['auth'])) {
+	echo 'opaf30, '. $_SESSION['auth']['username']. '<br>';
+	echo '<a href="/auth.php?logout=1">вы</a>';
+	die();
+} elseif (isset($_SESSION['epop'])){
+	echo  "еррор";
+
+	unset($_SESSION['epop']);
+}
+
+
+?>
+
+<style>
+body {
+	display: grid;
+	align-content: center;
+	justify-content: center;
+	
+}
+
+.in {
+	margin-top: 40px;
+	
+
+}
+input {
+
+	font-size: 22px;
+	font-family: Arial, sans-serif;
+	margin: 11px;
+	padding: 30px;
+	background-color: purple;
+	border-radius: 14px;
+
+
+}
+</style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+
+	<form action="/auth.php" method="post" class="in">
+	<input type="text" name="username">
+	<br>
+	<input type="password" name="password">
+	<br>
+	<input type="submit" name="войти" style="margin-left: 60px;">
+</form>
+	
+</body>
+</html>
